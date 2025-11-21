@@ -3,8 +3,12 @@ package com.watchmymoney.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
+import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
+import android.content.ComponentName
+import com.watchmymoney.complication.SalaryComplicationService
 import com.watchmymoney.data.SalaryRepository
 import kotlinx.coroutines.launch
 
@@ -14,6 +18,13 @@ fun MainScreen() {
     val repository = SalaryRepository(context)
     val userConfig by repository.userConfig.collectAsState(initial = null)
     val scope = rememberCoroutineScope()
+    
+    val complicationRequester = remember {
+        ComplicationDataSourceUpdateRequester.create(
+            context,
+            ComponentName(context, SalaryComplicationService::class.java)
+        )
+    }
 
     if (userConfig == null) {
         // Loading state, maybe show a spinner?
@@ -27,6 +38,7 @@ fun MainScreen() {
             onSalarySet = { newSalary ->
                 scope.launch {
                     repository.updateAnnualSalary(newSalary)
+                    complicationRequester.requestUpdateAll()
                 }
             }
         )
@@ -39,6 +51,7 @@ fun MainScreen() {
                 scope.launch {
                     // Resetting salary to 0 will trigger the OnboardingScreen
                     repository.updateAnnualSalary(0.0)
+                    complicationRequester.requestUpdateAll()
                 }
             }
         )

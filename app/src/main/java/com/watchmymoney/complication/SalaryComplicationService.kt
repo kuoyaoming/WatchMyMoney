@@ -24,7 +24,7 @@ class SalaryComplicationService : SuspendingComplicationDataSourceService() {
         val now = System.currentTimeMillis()
         val result = SalaryCalculator.calculate(config.annualSalary, now, config.resetHour)
         
-        val earnedText = "${config.currencySymbol}${String.format("%.2f", result.earnedToday)}"
+        val earnedText = "${config.currencySymbol}${String.format("%.0f", result.earnedToday)}"
         val contentDescription = PlainComplicationText.Builder("Earned today: $earnedText").build()
         
         // Create tap action to open the app

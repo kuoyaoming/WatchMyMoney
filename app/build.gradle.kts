@@ -10,10 +10,10 @@ android {
 
     defaultConfig {
         applicationId = "com.watchmymoney"
-        minSdk = 33
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = 30 // Wear OS 3.0+
+        targetSdk = 34 // Android 14 (Wear OS 5 target)
+        versionCode = 2
+        versionName = "1.1"
         vectorDrawables {
             useSupportLibrary = true
         }
