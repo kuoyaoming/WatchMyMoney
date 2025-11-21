@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Backspace
@@ -24,10 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.ButtonDefaults
-import androidx.wear.compose.material.CompactButton
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
@@ -38,19 +35,18 @@ fun OnboardingScreen(
 ) {
     var inputString by remember { mutableStateOf("") }
 
-    // Compact layout for round screens (Pixel Watch 2 is ~192dp usable height)
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 14.dp, vertical = 6.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // Display Area - Compact
+        // Display Area
         Text(
             text = if (inputString.isEmpty()) "Salary?" else "$$inputString",
-            style = MaterialTheme.typography.title3,
+            style = MaterialTheme.typography.title2,
             color = if (inputString.isEmpty()) Color.Gray else MaterialTheme.colors.primary,
             textAlign = TextAlign.Center,
             maxLines = 1
@@ -58,9 +54,15 @@ fun OnboardingScreen(
         
         Spacer(modifier = Modifier.height(4.dp))
 
-        // Number Pad - Tighter spacing
-        val buttonSize = 34.dp // Slightly larger than standard CompactButton for touch target
-        val spacing = 2.dp
+        // Number Pad - 3 Columns
+        // Layout:
+        // 1 2 3
+        // 4 5 6
+        // 7 8 9
+        // ⌫ 0 ✔️
+
+        val buttonSize = 38.dp // Large comfortable touch target
+        val spacing = 4.dp
 
         Row(horizontalArrangement = Arrangement.spacedBy(spacing)) {
             NumButton("1", buttonSize) { inputString += "1" }
@@ -81,30 +83,24 @@ fun OnboardingScreen(
         }
         Spacer(modifier = Modifier.height(spacing))
         Row(horizontalArrangement = Arrangement.spacedBy(spacing)) {
-            NumButton(".", buttonSize) { 
-                if (!inputString.contains(".")) {
-                    inputString = if (inputString.isEmpty()) "0." else inputString + "."
-                }
-            }
-            NumButton("0", buttonSize) { if (inputString.isNotEmpty()) inputString += "0" }
             // Backspace
-            CompactButton(
+            Button(
                 onClick = {
                     if (inputString.isNotEmpty()) {
                         inputString = inputString.dropLast(1)
                     }
                 },
-                colors = ButtonDefaults.secondaryButtonColors(),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 modifier = Modifier.size(buttonSize)
             ) {
                 Icon(Icons.Rounded.Backspace, contentDescription = "Del")
             }
-        }
 
-        Spacer(modifier = Modifier.height(4.dp))
+            // 0
+            NumButton("0", buttonSize) { if (inputString.isNotEmpty()) inputString += "0" }
 
-        // Confirm Button - Only show if valid to save space, or keep it small
-        if (inputString.isNotEmpty() && inputString.toDoubleOrNull() != null && inputString.toDouble() > 0) {
+            // Confirm
+            val isValid = inputString.isNotEmpty() && (inputString.toDoubleOrNull() ?: 0.0) > 0
             Button(
                 onClick = {
                     val salary = inputString.toDoubleOrNull()
@@ -112,25 +108,23 @@ fun OnboardingScreen(
                         onSalarySet(salary)
                     }
                 },
-                colors = ButtonDefaults.primaryButtonColors(),
-                modifier = Modifier.height(32.dp).width(80.dp) // Wide but short
+                enabled = isValid,
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
+                modifier = Modifier.size(buttonSize)
             ) {
                 Icon(Icons.Rounded.Check, contentDescription = "Confirm")
             }
-        } else {
-             // Placeholder to keep layout stable or just empty
-             Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
 
 @Composable
 fun NumButton(text: String, size: androidx.compose.ui.unit.Dp, onClick: () -> Unit) {
-    CompactButton(
+    Button(
         onClick = onClick,
-        colors = ButtonDefaults.secondaryButtonColors(),
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
         modifier = Modifier.size(size)
     ) {
-        Text(text = text, style = MaterialTheme.typography.body2)
+        Text(text = text, style = MaterialTheme.typography.button)
     }
 }

@@ -4,6 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.ButtonDefaults
+import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.watchmymoney.logic.SalaryCalculator
-import java.text.DecimalFormat
 
 @Composable
 fun TickerScreen(
@@ -35,8 +40,6 @@ fun TickerScreen(
     LaunchedEffect(annualSalary, resetHour) {
         while (true) {
             withFrameMillis { frameTimeMillis ->
-                // We use System.currentTimeMillis() for wall-clock accuracy
-                // frameTimeMillis is monotonic, good for delta, but we need absolute time for salary
                 val now = System.currentTimeMillis()
                 val result = SalaryCalculator.calculate(annualSalary, now, resetHour)
                 earnedAmount = result.earnedToday
@@ -65,7 +68,8 @@ fun TickerScreen(
             style = MaterialTheme.typography.display1.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = 40.sp
-            )
+            ),
+            color = MaterialTheme.colors.primary
         )
         Text(
             text = ".$decimalPart",
@@ -74,13 +78,15 @@ fun TickerScreen(
             )
         )
         
-        androidx.wear.compose.material.CompactButton(
+        Button(
             onClick = onEditClick,
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp).size(32.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface)
         ) {
-            androidx.wear.compose.material.Icon(
-                imageVector = androidx.compose.material.icons.Icons.Rounded.Edit,
-                contentDescription = "Edit"
+            Icon(
+                imageVector = Icons.Rounded.Edit,
+                contentDescription = "Edit",
+                modifier = Modifier.size(18.dp)
             )
         }
     }

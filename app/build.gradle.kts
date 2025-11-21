@@ -12,16 +12,20 @@ android {
         applicationId = "com.watchmymoney"
         minSdk = 30 // Wear OS 3.0+
         targetSdk = 34 // Android 14 (Wear OS 5 target)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.1"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        ndk {
+            debugSymbolLevel = "FULL"
         }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
