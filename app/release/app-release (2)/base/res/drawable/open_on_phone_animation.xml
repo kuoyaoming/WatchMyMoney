@@ -1,0 +1,29 @@
+
+…
+;
+android*http://schemas.android.com/apk/res/android2
+-
+aapthttp://schemas.android.com/aapt2animated-vector"š
+*http://schemas.android.com/apk/res/androiddrawable&@drawable/$open_on_phone_animation__13"(™ƒ„21
+/±€œø%drawable/$open_on_phone_animation__130*ú
+ñtarget"K
+*http://schemas.android.com/apk/res/androidname_R_G_L_0_G_D_0_P_0(ƒ€„"™
+*http://schemas.android.com/apk/res/android	animation%@drawable/$open_on_phone_animation__0"(Íƒ„20
+.¬€œø$drawable/$open_on_phone_animation__00/*ú
+ñtarget"K
+*http://schemas.android.com/apk/res/androidname_R_G_L_0_G_D_1_P_0(ƒ€„"™
+*http://schemas.android.com/apk/res/android	animation%@drawable/$open_on_phone_animation__2""(Íƒ„20
+.²€œø$drawable/$open_on_phone_animation__20"/*ú
+ñtarget"K
+*http://schemas.android.com/apk/res/androidname_R_G_L_0_G_D_2_P_0(ƒ€„"™
+*http://schemas.android.com/apk/res/android	animation%@drawable/$open_on_phone_animation__6"I(Íƒ„20
+.¶€œø$drawable/$open_on_phone_animation__60I/*ø
+ïtarget"G
+*http://schemas.android.com/apk/res/androidname_R_G_L_0_G_T_1(ƒ€„"›
+*http://schemas.android.com/apk/res/android	animation&@drawable/$open_on_phone_animation__10"p(Íƒ„21
+/®€œø%drawable/$open_on_phone_animation__100p+*ö
+ìtarget"C
+*http://schemas.android.com/apk/res/androidname
+time_group(ƒ€„"œ
+*http://schemas.android.com/apk/res/android	animation&@drawable/$open_on_phone_animation__12"(Íƒ„21
+/°€œø%drawable/$open_on_phone_animation__120'2
