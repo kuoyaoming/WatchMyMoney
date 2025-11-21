@@ -32,3 +32,10 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Keystore properties
+keystore.properties
+
+# OS Files
+.DS_Store
+Thumbs.db

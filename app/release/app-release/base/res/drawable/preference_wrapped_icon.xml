@@ -1,0 +1,24 @@
+
+Ç
+;
+android*http://schemas.android.com/apk/res/android2
+layer-list*—
+item*…
+üshape"H
+*http://schemas.android.com/apk/res/androidshapeoval"(šƒ„2:0"z
+*http://schemas.android.com/apk/res/androidtint?android:colorPrimary"(¡‚„2&
+$³ˆ„android:attr/colorPrimary0*ƒ
+{solid"r
+*http://schemas.android.com/apk/res/androidcolor@android:color/white"(¥ƒ„2
+‹€˜android:color/white05*¦
+size"J
+*http://schemas.android.com/apk/res/androidheight40dp"	(Õ‚„2:hP"I
+*http://schemas.android.com/apk/res/androidwidth40dp"	(Ù‚„2:hP	:F	*á
+Øitem"L
+*http://schemas.android.com/apk/res/androidgravitycenter"(¯„2:8"
+*http://schemas.android.com/apk/res/androiddrawable@android:color/transparent"(™ƒ„2$
+"€˜android:color/transparent0"J
+*http://schemas.android.com/apk/res/androidheight24dp"(Õ‚„2:h0"I
+*http://schemas.android.com/apk/res/androidwidth24dp"(Ù‚„2:h0"g
+*http://schemas.android.com/apk/res/androidid@+id/nested_icon"(Ğ„2
+‡¤øid/nested_icon0"2
